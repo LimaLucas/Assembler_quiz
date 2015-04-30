@@ -1,5 +1,3 @@
-#Assembler_quiz
-
 
 .data
 	mensagem_alternativa: .asciiz "Digite o numero da alternativa: "
