@@ -1,0 +1,5 @@
+git pull
+git status
+git add *
+git commit -a -m "comentario"
+git push origin
