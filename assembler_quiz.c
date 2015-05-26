@@ -51,17 +51,19 @@ int main(void){
 	printf("%s\n", perguntas1[iPerg+1]);
 	printf("%s\n", perguntas1[iPerg+2]);
 	printf("%s\n", perguntas1[iPerg+3]);
-	printf("%s\n", perguntas1[iPerg+4]);	
+	printf("%s\n", perguntas1[iPerg+4]);
 
-	printf("Deseja utilizar sua ajuda (Não: 0)?\n");
-	scanf("%i", &resp);
-	if((resp != 0) && ajuda == 1){
-		alt = rand()%4;
-		while(alt == respostas[iResp]){
+	if(ajuda == 1){
+		printf("Deseja utilizar sua ajuda (Não: 0)?\n");
+		scanf("%i", &resp);
+		if(resp != 0){
 			alt = rand()%4;
+			while(alt == respostas[iResp]){
+				alt = rand()%4;
+			}
+			printf("A alternativa %i está errada!\n", alt);
+			ajuda--;
 		}
-		printf("A alternativa %i está errada!\n", alt);
-		ajuda--;
 	}
 
 	printf("Qual sua resposta? \n");
@@ -87,15 +89,17 @@ int main(void){
 	printf("%s\n", perguntas2[iPerg+3]);
 	printf("%s\n", perguntas2[iPerg+4]);	
 
-	printf("Deseja utilizar sua ajuda (Não: 0)?\n");
-	scanf("%i", &resp);
-	if((resp != 0) && ajuda == 1){
-		alt = rand()%4;
-		while(alt == respostas[iResp]){
+	if(ajuda == 1){
+		printf("Deseja utilizar sua ajuda (Não: 0)?\n");
+		scanf("%i", &resp);
+		if(resp != 0){
 			alt = rand()%4;
+			while(alt == respostas[iResp]){
+				alt = rand()%4;
+			}
+			printf("A alternativa %i está errada!\n", alt);
+			ajuda--;
 		}
-		printf("A alternativa %i está errada!\n", alt);
-		ajuda--;
 	}
 
 	printf("Qual sua resposta? \n");
@@ -121,15 +125,17 @@ int main(void){
 	printf("%s\n", perguntas3[iPerg+3]);
 	printf("%s\n", perguntas3[iPerg+4]);	
 
-	printf("Deseja utilizar sua ajuda (Não: 0)?\n");
-	scanf("%i", &resp);
-	if((resp != 0) && ajuda == 1){
-		alt = rand()%4;
-		while(alt == respostas[iResp]){
+	if(ajuda == 1){
+		printf("Deseja utilizar sua ajuda (Não: 0)?\n");
+		scanf("%i", &resp);
+		if(resp != 0){
 			alt = rand()%4;
+			while(alt == respostas[iResp]){
+				alt = rand()%4;
+			}
+			printf("A alternativa %i está errada!\n", alt);
+			ajuda--;
 		}
-		printf("A alternativa %i está errada!\n", alt);
-		ajuda--;
 	}
 
 	printf("Qual sua resposta? \n");

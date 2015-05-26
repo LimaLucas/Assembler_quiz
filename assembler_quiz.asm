@@ -1,4 +1,6 @@
 .data
+	desejaAjuda: .asciiz "\nDeseja utilizar sua ajuda (Não: 0)?"
+	
 	p11: .asciiz "\nPergunta 1?"
 	a111: .asciiz "\n	1) 1 Alternativa 1"
 	a211: .asciiz "\n	2) 1 Alternativa 2"
@@ -50,11 +52,9 @@
 	la $s0, nivel_1		# Move o endereço base da matriz para o registrador $s0
 	
 	# PARA IMPRIMIR A PERGUNTA
-	li $t0, 5		#
-	mul $s2, $s5, $t0	# Salva no registrador $s2 o indice da pergunta
+	mul $s2, $s5, 5	# Salva no registrador $s2 o indice da pergunta
 	
-	li $t0, 4		#\
-	mul $s1, $s2, $t0	# Salva no registrador $s1 o endereço da pergunta sorteada
+	mul $s1, $s2, 4		# Salva no registrador $s1 o endereço da pergunta sorteada
 	add $s1, $s1, $s0	#/
 	
 	li $v0, 4		#\
@@ -86,5 +86,35 @@
 	lw $a0, 0($s1)		# Imprime a alternativa 4
 	syscall			#/
 	
-		
+	jal VERIF_AJUDA
+	
+VERIF_AJUDA:
+	beq $s7, 1, AJUDA
+	jr $ra
+
+AJUDA:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	
+	li $v0, 4		#\
+	la $a0, desejaAjuda	# Pergunta se o jogador deseja utilizar a ajuda
+	syscall			#/
+	
+	li $v0, 5		#
+	syscall			# Lê resposta do jogador sobre a ajuda
+	
+	beq $v0, $zero, SEM_AJUDA
+	
+	
+SEM_AJUDA:
+	lw $ra, 0($sp)
+	addi $sp $sp, 4
+	
+	jr $ra
+	
+	
+	
+	
+	
+	
 	
