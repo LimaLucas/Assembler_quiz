@@ -353,7 +353,7 @@ EXIT:
 	
 	naoAlternativa: .asciiz "Não é a alternativa: "
 	respostaErrada: .asciiz "Resposta errada! Fim de jogo.\n"
-	respostaCerta: .asciiz "Resposta certa!\n"
+	respostaCerta: .asciiz "\nResposta certa!\n"
 	voceVenceu: .asciiz "PARABÉNS! Você venceu o Assembler Quiz\n"
 	
 	print_nivel_1: .asciiz ">> NIVEL 1\n"
