@@ -9,7 +9,6 @@
 	# $s7 -> AJUDA
 	
 main:
-
 	li $v0, 4		#\
 	la $a0, bemVindo	# Imprime o conteúdo da variável bemVindo
 	syscall			#/
@@ -25,7 +24,6 @@ main:
 	j GAME_OVER
 		
 NIVEL_1:
-
 	li $v0, 42		#\
 	li $a1, 4		# Gera número aleatório para pegar o índice da pergunta
 	syscall			#/
@@ -104,11 +102,168 @@ NIVEL_1:
 	
 	
 NIVEL_2:
+	li $v0, 4		#\
+	la $a0, respostaCerta	# Imprime o conteúdo da variável respostaCerta
+	syscall			#/	
+	
+	li $v0, 42		#\
+	li $a1, 4		# Gera número aleatório para pegar o índice da pergunta
+	syscall			#/
+	
+	move $s5, $a0		# Salva o número aleatório para o registrador $s5
+	la $s0, mat_nivel_2	# Move o endereço base da matriz para o registrador $s0
+	
+	### IMPRIME O NIVEL DA PERGUNTA ###
+	
+	li $v0, 4		#\
+	la $a0, print_nivel_2	# Imprime o conteúdo da variável print_nivel_1
+	syscall			#/
+	
+	### PARA IMPRIMIR A PERGUNTA
+	
+	mul $s2, $s5, 5		# Move para o registrador $s2 o indice da pergunta
+	
+	mul $s1, $s2, 4		#\
+	add $s1, $s1, $s0	# Move para o registrador $s1 o endereço da pergunta sorteada
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a pergunta sorteada
+	syscall			#/
+	
+	### PARA IMPRIMIR AS ALTERNATIVAS
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 1
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 1
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 2
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 2
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 3
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 3
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 4
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 4
+	syscall			#/
+	
+	### PARA SALVAR O VALOR DA RESPOSTA ###
+	
+	la $s0, vet_respostas	# Move o endereço base do vetor das respostas para $s0
+	
+	mul $s2, $s6, 4		#\
+	add $s2, $s2, $s5	# Salva no registrador $s3 o índice da resposta
+	
+	mul $s1, $s2, 4		#\
+	add $s1, $s1, $s0	# Move para o registrador $s1 o endereço da resposta
+	
+	lw $s3, 0($s1)		# Salva o valor da resposta no registrador $s3
+	
+	jal VERIF_AJUDA
+	
+	li $v0, 4		#\
+	la $a0, informeResposta	# Pede para o jogador informar sua resposta
+	syscall			#/
+	
+	li $v0, 5		#
+	syscall			# Lê resposta do jogador sobre
+	
+	move $s4, $v0		# Salva no registrador $s4 a resposta do jogador
+	
+	beq $s4, $s3, NIVEL_3	# Faz o jogador progredir para o NIVEL 2 caso acerte
+	j GAME_OVER		# Termina o jogo caso o jogador erre
 	
 
 NIVEL_3:
-
-
+	li $v0, 4		#\
+	la $a0, respostaCerta	# Imprime o conteúdo da variável respostaCerta
+	syscall			#/
+	
+	li $v0, 42		#\
+	li $a1, 4		# Gera número aleatório para pegar o índice da pergunta
+	syscall			#/
+	
+	move $s5, $a0		# Salva o número aleatório para o registrador $s5
+	la $s0, mat_nivel_3	# Move o endereço base da matriz para o registrador $s0
+	
+	### IMPRIME O NIVEL DA PERGUNTA ###
+	
+	li $v0, 4		#\
+	la $a0, print_nivel_3	# Imprime o conteúdo da variável print_nivel_1
+	syscall			#/
+	
+	### PARA IMPRIMIR A PERGUNTA
+	
+	mul $s2, $s5, 5		# Move para o registrador $s2 o indice da pergunta
+	
+	mul $s1, $s2, 4		#\
+	add $s1, $s1, $s0	# Move para o registrador $s1 o endereço da pergunta sorteada
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a pergunta sorteada
+	syscall			#/
+	
+	### PARA IMPRIMIR AS ALTERNATIVAS
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 1
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 1
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 2
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 2
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 3
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 3
+	syscall			#/
+	
+	addi $s1, $s1, 4 	# Move para o registrador $s1 o endereço da alternativa 4
+	
+	li $v0, 4		#\
+	lw $a0, 0($s1)		# Imprime a alternativa 4
+	syscall			#/
+	
+	### PARA SALVAR O VALOR DA RESPOSTA ###
+	
+	la $s0, vet_respostas	# Move o endereço base do vetor das respostas para $s0
+	
+	mul $s2, $s6, 4		#\
+	add $s2, $s2, $s5	# Salva no registrador $s3 o índice da resposta
+	
+	mul $s1, $s2, 4		#\
+	add $s1, $s1, $s0	# Move para o registrador $s1 o endereço da resposta
+	
+	lw $s3, 0($s1)		# Salva o valor da resposta no registrador $s3
+	
+	jal VERIF_AJUDA
+	
+	li $v0, 4		#\
+	la $a0, informeResposta	# Pede para o jogador informar sua resposta
+	syscall			#/
+	
+	li $v0, 5		#
+	syscall			# Lê resposta do jogador sobre
+	
+	move $s4, $v0		# Salva no registrador $s4 a resposta do jogador
+	
+	beq $s4, $s3, YOU_WIN	# Faz o jogador progredir para o NIVEL 2 caso acerte
+	j GAME_OVER		# Termina o jogo caso o jogador erre
+	
 	
 VERIF_AJUDA:
 	beq $s7, 1, AJUDA	# Verifica se o jogador pode utilizar a ajuda
@@ -155,20 +310,23 @@ WHILE_AJUDA:
 	li $v0, 1		#\
 	syscall			# Imprime o número da alternativa eliminada
 	
+	addi $s7, $s7, -1	# Retira o direito de ajuda do jogador
+	
 	jr $ra			# Retorna para a AJUDA
+	
 	
 SEM_AJUDA:
 	jr $ra			# Retorna ao main caso o jogador não queira ajuda
 	
-
+	
 YOU_WIN:
 	li $v0, 4		#\
 	la $a0, voceVenceu	# Imprime o conteúdo da variável voceVenceu
 	syscall			#/
 	
 	j EXIT			# Chama o EXIT
-
-
+	
+	
 GAME_OVER:
 	li $v0, 4		#\
 	la $a0, respostaErrada	# Imprime o conteúdo da variável respostaErrada
@@ -176,20 +334,22 @@ GAME_OVER:
 	
 	j EXIT			# Chama o EXIT
 	
+	
 EXIT:
 	li $v0, 10		#\
 	syscall			# Termina a execução do programa
-		
+	
+	
 .data
-	bemVindo: .asciiz ">>>>> Bem vindo ao Assembler Quiz <<<<<\n\n"
-	instrucao: .asciiz ">> Você terá apenas uma ajuda durante o jogo para responder uma pergunta \n"
+	bemVindo: .asciiz ">>>>> Bem visndo ao Assembler Quiz <<<<<\n\n"
+	instrucao: .asciiz ">>> Você terá apenas uma ajuda durante o jogo para responder uma pergunta \n"
 	
 	desejaAjuda: .asciiz "\nDeseja utilizar sua ajuda (Não: 0)?"
 	informeResposta: .asciiz "\nInforme sua resposta: "
 	
 	naoAlternativa: .asciiz "Não é a alternativa: "
 	respostaErrada: .asciiz "Resposta errada! Fim de jogo.\n"
-	respostaCerta: .asciiz "Resposta certa!"
+	respostaCerta: .asciiz "Resposta certa!\n"
 	voceVenceu: .asciiz "PARABÉNS! Você venceu o Assembler Quiz\n"
 	
 	print_nivel_1: .asciiz ">> NIVEL 1\n"
