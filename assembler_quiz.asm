@@ -104,7 +104,9 @@ NIVEL_1:
 NIVEL_2:
 	li $v0, 4		#\
 	la $a0, respostaCerta	# Imprime o conteúdo da variável respostaCerta
-	syscall			#/	
+	syscall			#/
+	
+	addi $s6, $s6, 1	# Incrementa o NÍVEL do jogo
 	
 	li $v0, 42		#\
 	li $a1, 4		# Gera número aleatório para pegar o índice da pergunta
@@ -187,6 +189,8 @@ NIVEL_3:
 	li $v0, 4		#\
 	la $a0, respostaCerta	# Imprime o conteúdo da variável respostaCerta
 	syscall			#/
+	
+	addi $s6, $s6, 1	# Incrementa o NÍVEL do jogo
 	
 	li $v0, 42		#\
 	li $a1, 4		# Gera número aleatório para pegar o índice da pergunta
@@ -410,7 +414,7 @@ EXIT:
 	a332: .asciiz "\n	3) bqe"
 	a432: .asciiz "\n	4) beq"
 	
-	p42: .asciiz "\nA instrução li  $v0, 4 seguida pela chamada do sistema serve para:"
+	p42: .asciiz "\nA instrução li $v0, 4 seguida pela chamada do sistema serve para:"
 	a142: .asciiz "\n	1) imprimir na tela um valor do tipo integer"
 	a242: .asciiz "\n	2) imprimir na tela um valor do tipo float"
 	a342: .asciiz "\n	3) imprimir na tela uma string"
