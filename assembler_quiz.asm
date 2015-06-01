@@ -92,7 +92,7 @@ NIVEL_1:
 	la $a0, informeResposta	# Pede para o jogador informar sua resposta
 	syscall			#/
 	
-	li $v0, 5		#
+	li $v0, 5		#\
 	syscall			# Lê resposta do jogador sobre
 	
 	move $s4, $v0		# Salva no registrador $s4 a resposta do jogador
@@ -176,7 +176,7 @@ NIVEL_2:
 	la $a0, informeResposta	# Pede para o jogador informar sua resposta
 	syscall			#/
 	
-	li $v0, 5		#
+	li $v0, 5		#\
 	syscall			# Lê resposta do jogador sobre
 	
 	move $s4, $v0		# Salva no registrador $s4 a resposta do jogador
@@ -260,7 +260,7 @@ NIVEL_3:
 	la $a0, informeResposta	# Pede para o jogador informar sua resposta
 	syscall			#/
 	
-	li $v0, 5		#
+	li $v0, 5		#\
 	syscall			# Lê resposta do jogador sobre
 	
 	move $s4, $v0		# Salva no registrador $s4 a resposta do jogador
@@ -279,7 +279,7 @@ AJUDA:
 	la $a0, desejaAjuda	# Pergunta se o jogador deseja utilizar a ajuda
 	syscall			#/
 	
-	li $v0, 5		#
+	li $v0, 5		#\
 	syscall			# Lê resposta do jogador sobre a ajuda
 	
 	beq $v0, $zero, SEM_AJUDA	# Verifica se o jogador quer ajuda
